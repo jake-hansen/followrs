@@ -10,6 +10,7 @@ import (
 	"github.com/jake-hansen/followrs/server"
 )
 
+// main parses any given flags and starts the server.
 func main() {
 	var environment *string = flag.String("e", "dev", "environment to run in")
 	flag.Usage = func() {
@@ -26,6 +27,7 @@ func main() {
 	server.Init(*environment)
 }
 
+// printTitle prints the given title to the screen in ASCII art format.
 func printTitle(title string) {
 	figure.NewFigure(title, "larry3d", false).Print()
 }
