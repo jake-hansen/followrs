@@ -18,11 +18,13 @@ func NewSimpleHealthService(repo domain.HealthRepository) domain.HealthService {
 
 func (hs *HealthService) GetHealth() (domain.Health, error) {
 	status, err := hs.Repo.GetStatus()
+	upsince, err2 := hs.Repo.GetUpsince()
 	var returnErr error = nil
-	if err != nil {
+	if err != nil || err2 != nil {
 		returnErr = errors.New("an error occurred retrieving health status of the server")
 	}
 	return domain.Health{
-		Status: status,
+		Status:  status,
+		Upsince: upsince,
 	}, returnErr
 }

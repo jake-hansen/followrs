@@ -22,3 +22,8 @@ func (m *HealthRepository) GetUpsince() (time.Time, error) {
 	args := m.Called()
 	return args.Get(0).(time.Time), args.Error(1)
 }
+
+// SetStartTime provides a mock function.
+func (m *HealthRepository) SetStartTime(startTime time.Time) {
+	m.Called(startTime)
+}

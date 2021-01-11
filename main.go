@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/common-nighthawk/go-figure"
 	"github.com/jake-hansen/followrs/config"
@@ -24,7 +25,7 @@ func main() {
 	printTitle(title)
 	fmt.Println("running in environment " + *environment)
 
-	server.Init(*environment)
+	server.Init(*environment, time.Now())
 }
 
 // printTitle prints the given title to the screen in ASCII art format.

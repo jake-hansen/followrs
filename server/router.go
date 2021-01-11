@@ -1,6 +1,8 @@
 package server
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jake-hansen/followrs/handlers"
 	"github.com/jake-hansen/followrs/middleware"
@@ -10,7 +12,7 @@ import (
 
 // NewRouter returns a router configured with handlers for configured
 // endpoints.
-func NewRouter(env string) *gin.Engine {
+func NewRouter(env string, startTime time.Time) *gin.Engine {
 	setGinEnvironment(env)
 	router := gin.New()
 	router.Use(gin.Logger())
@@ -18,7 +20,7 @@ func NewRouter(env string) *gin.Engine {
 	router.Use(middleware.PublicErrorHandler())
 
 	v1 := router.Group("v1")
-	handlers.NewHealthHandler(v1, services.NewSimpleHealthService(repositories.NewSimpleHealthRepository()))
+	handlers.NewHealthHandler(v1, services.NewSimpleHealthService(repositories.NewSimpleHealthRepository(startTime)))
 
 	return router
 }
