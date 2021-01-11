@@ -1,6 +1,8 @@
 package services
 
 import (
+	"errors"
+
 	"github.com/jake-hansen/followrs/domain"
 )
 
@@ -15,8 +17,12 @@ func NewSimpleHealthService(repo domain.HealthRepository) domain.HealthService {
 }
 
 func (hs *HealthService) GetHealth() (domain.Health, error) {
-	status, _ := hs.Repo.GetStatus()
+	status, err := hs.Repo.GetStatus()
+	var returnErr error = nil
+	if err != nil {
+		returnErr = errors.New("an error occurred retrieving health status of the server")
+	}
 	return domain.Health{
 		Status: status,
-	}, nil
+	}, returnErr
 }
