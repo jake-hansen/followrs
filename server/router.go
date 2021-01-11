@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/jake-hansen/followrs/handlers"
+	"github.com/jake-hansen/followrs/middleware"
 	"github.com/jake-hansen/followrs/repositories"
 	"github.com/jake-hansen/followrs/services"
 )
@@ -14,6 +15,7 @@ func NewRouter(env string) *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
+	router.Use(middleware.PublicErrorHandler())
 
 	v1 := router.Group("v1")
 	handlers.NewHealthHandler(v1, services.NewSimpleHealthService(repositories.NewSimpleHealthRepository()))
