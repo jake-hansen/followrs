@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jake-hansen/followrs/handlers"
+	"github.com/jake-hansen/followrs/apperrors"
 )
 
 // APIErrorJSON represents an error message.
@@ -28,7 +28,7 @@ func handlePublicErrors() gin.HandlerFunc {
 
 		err := c.Errors.ByType(gin.ErrorTypePublic).Last()
 		if err != nil {
-			var apiError *handlers.APIError
+			var apiError *apperrors.APIError
 			if errors.As(err.Err, &apiError) {
 				displayError := APIErrorJSON{
 					Error: apiError.Message,

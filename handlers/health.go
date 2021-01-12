@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jake-hansen/followrs/apperrors"
 	"github.com/jake-hansen/followrs/domain"
 )
 
@@ -30,7 +31,7 @@ func (h *HealthHandler) Status(c *gin.Context) {
 	if err == nil {
 		c.JSON(http.StatusOK, health)
 	} else {
-		apiError := &APIError{
+		apiError := &apperrors.APIError{
 			Status:  http.StatusInternalServerError,
 			Err:     err,
 			Message: "An error occurred while retrieving the server's status",

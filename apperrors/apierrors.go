@@ -1,6 +1,8 @@
-package handlers
+package apperrors
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // APIError represents an error that occurred during an operation on an endpoint.
 type APIError struct {
