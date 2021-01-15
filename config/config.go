@@ -1,6 +1,8 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/spf13/viper"
 )
 
@@ -14,6 +16,11 @@ func Init(env string) {
 	config.SetConfigType("json")
 	config.SetConfigName(env)
 	config.AddConfigPath("config/")
+
+	config.SetEnvPrefix("followrs")
+	config.AutomaticEnv()
+	replacer := strings.NewReplacer(".", "_")
+	config.SetEnvKeyReplacer(replacer)
 
 	if err := config.ReadInConfig(); err != nil {
 		panic(err)

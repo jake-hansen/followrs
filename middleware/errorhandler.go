@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,12 +34,13 @@ func handlePublicErrors() gin.HandlerFunc {
 				displayError := APIErrorJSON{
 					Error: apiError.Message,
 				}
-
+				log.Print(apiError.Err.Error())
 				c.JSON(apiError.Status, displayError)
 			} else {
 				displayError := APIErrorJSON{
 					Error: "unknown error occurred.",
 				}
+				log.Print(err.Error())
 				c.JSON(http.StatusInternalServerError, displayError)
 			}
 		}

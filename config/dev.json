@@ -1,5 +1,14 @@
 {
     "server": {
         "address": ":8080"
+    },
+    "secrets": {
+        "twitter": {
+            "api": {
+                "key": "${FOLLOWRS_SECRETS_TWITTER_API_KEY}",
+                "secret": "${FOLLOWRS_SECRETS_TWITTER_API_SECRET}",
+                "bearer": "${FOLLOWRS_SECRETS_TWITTER_API_BEARER}"
+            }
+        }
     }
 }
